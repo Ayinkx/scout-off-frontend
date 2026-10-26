@@ -9,6 +9,12 @@ on:
       - 'hooks/**/*.ts'
       - 'typedoc.json'
       - '.github/workflows/api-reference.yml'
+  pull_request:
+    paths:
+      - 'lib/**/*.ts'
+      - 'hooks/**/*.ts'
+      - 'typedoc.json'
+      - '.github/workflows/api-reference.yml'
 
 permissions:
   contents: read
