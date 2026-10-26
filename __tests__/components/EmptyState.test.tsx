@@ -45,6 +45,20 @@ describe('EmptyState', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
+  it('renders an optional illustration as decorative content', () => {
+    render(
+      <EmptyState
+        title="No players found"
+        illustration={<svg data-testid="empty-illustration" />}
+      />,
+    );
+    expect(screen.getByTestId('empty-illustration')).toBeInTheDocument();
+    expect(screen.getByTestId('empty-illustration').parentElement).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    );
+  });
+
   it('matches snapshot', () => {
     const { container } = render(
       <EmptyState
