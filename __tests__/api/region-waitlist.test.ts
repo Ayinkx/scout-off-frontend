@@ -2,10 +2,10 @@
 import { POST } from '@/app/api/region-waitlist/route';
 import { NextRequest } from 'next/server';
 
-const redisSet = jest.fn();
+const mockRedisSet = jest.fn();
 
 jest.mock('@upstash/redis', () => ({
-  Redis: jest.fn().mockImplementation(() => ({ set: redisSet })),
+  Redis: jest.fn().mockImplementation(() => ({ set: mockRedisSet })),
 }));
 jest.mock('@/lib/rateLimit', () => ({
   checkRateLimit: jest.fn().mockResolvedValue({ limited: false }),
@@ -25,7 +25,7 @@ describe('POST /api/region-waitlist', () => {
   const originalToken = process.env.UPSTASH_REDIS_REST_TOKEN;
 
   beforeEach(() => {
-    redisSet.mockReset();
+    mockRedisSet.mockReset();
     process.env.UPSTASH_REDIS_REST_URL = 'https://redis.example.test';
     process.env.UPSTASH_REDIS_REST_TOKEN = 'test-token';
   });
@@ -40,7 +40,7 @@ describe('POST /api/region-waitlist', () => {
   it('rejects malformed email before touching Redis', async () => {
     const response = await POST(request({ email: 'bad-email', region: 'West Africa' }));
     expect(response.status).toBe(400);
-    expect(redisSet).not.toHaveBeenCalled();
+    expect(mockRedisSet).not.toHaveBeenCalled();
   });
 
   it('returns 503 without claiming success when Redis is not configured', async () => {
@@ -51,10 +51,10 @@ describe('POST /api/region-waitlist', () => {
   });
 
   it('stores a normalized email and region with a one-year expiry', async () => {
-    redisSet.mockResolvedValue('OK');
+    mockRedisSet.mockResolvedValue('OK');
     const response = await POST(request({ email: ' Player@Example.com ', region: ' West Africa ' }));
     expect(response.status).toBe(201);
-    expect(redisSet).toHaveBeenCalledWith(
+    expect(mockRedisSet).toHaveBeenCalledWith(
       expect.stringMatching(/^scoutoff:region-waitlist:[a-f0-9]{64}$/),
       expect.stringContaining('"email":"player@example.com"'),
       { nx: true, ex: 60 * 60 * 24 * 365 },
@@ -62,7 +62,7 @@ describe('POST /api/region-waitlist', () => {
   });
 
   it('does not disclose whether the email was already registered', async () => {
-    redisSet.mockResolvedValue(null);
+    mockRedisSet.mockResolvedValue(null);
     const response = await POST(request({ email: 'player@example.com', region: 'West Africa' }));
     expect(response.status).toBe(200);
     expect((await response.json()).message).toMatch(/if this email has not already joined/i);
