@@ -1,0 +1,24 @@
+coverage:
+  status:
+    project:
+      default:
+        # Use the current uploaded baseline so enabling the check does not
+        # invent an unsupported absolute project-coverage target.
+        target: auto
+        threshold: 2%
+        informational: false
+    patch:
+      default:
+        # Keep new/changed lines covered, aligned with the existing 80% line
+        # coverage expectation; the first Codecov run should confirm baseline.
+        target: 80%
+        threshold: 5%
+        informational: false
+
+comment:
+  layout: "reach,diff,flags,tree"
+  behavior: default
+  require_changes: false
+
+github_checks:
+  annotations: true
