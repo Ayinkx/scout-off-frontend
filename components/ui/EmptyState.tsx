@@ -4,6 +4,8 @@ interface EmptyStateProps {
   title: string;
   description?: string;
   icon?: ReactNode;
+  /** Optional decorative SVG/graphic displayed above the icon and title. */
+  illustration?: ReactNode;
   action?: { label: string; onClick: () => void };
 }
 
@@ -11,10 +13,16 @@ export default function EmptyState({
   title,
   description,
   icon,
+  illustration,
   action,
 }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+      {illustration && (
+        <div aria-hidden="true" className="mb-5 text-brand-green">
+          {illustration}
+        </div>
+      )}
       <div className="text-gray-400 dark:text-gray-600 mb-4">
         {icon ?? (
           <svg
