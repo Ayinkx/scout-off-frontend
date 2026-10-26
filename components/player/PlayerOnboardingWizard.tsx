@@ -20,6 +20,7 @@ import Select from '@/components/ui/Select';
 import VideoUpload from '@/components/ui/VideoUpload';
 import TransactionStatus from '@/components/ui/TransactionStatus';
 import { AFRICAN_REGIONS } from '@/lib/regions';
+import RegionWaitlistForm from '@/components/player/RegionWaitlistForm';
 import { FOOTBALL_POSITIONS } from '@/lib/positions';
 import type { PlayerVitals } from '@/types';
 import type { TxStatus } from '@/components/ui/TransactionStatus';
@@ -299,7 +300,9 @@ export default function PlayerOnboardingWizard({
       case 'nationality':
         return value.trim() ? undefined : 'Nationality is required';
       case 'region':
-        return value ? undefined : 'Region is required';
+        if (!value) return 'Region is required';
+        if (value === 'unsupported') return 'Your region is not supported yet. Join the waitlist below.';
+        return undefined;
       case 'position':
         return value ? undefined : 'Position is required';
       default:
@@ -702,7 +705,9 @@ export default function PlayerOnboardingWizard({
                 {label}
               </option>
             ))}
+            <option value="unsupported">Other / region not listed</option>
           </Select>
+          {data.region === 'unsupported' && <RegionWaitlistForm />}
 
           <Select
             ref={positionRef}
