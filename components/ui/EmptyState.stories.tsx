@@ -55,3 +55,25 @@ export const WithCustomIcon: Story = {
     action: { label: 'Connect Wallet', onClick: fn() },
   },
 };
+
+export const WithIllustration: Story = {
+  args: {
+    title: 'No Players Found',
+    description:
+      'Try broadening your filters to discover more players.',
+    illustration: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-20 w-20"
+        viewBox="0 0 80 80"
+        fill="none"
+      >
+        <circle cx="40" cy="40" r="36" fill="currentColor" opacity="0.1" />
+        <circle cx="34" cy="30" r="9" stroke="currentColor" strokeWidth="3" />
+        <path d="M18 57c2-10 8-15 16-15s14 5 16 15" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="56" cy="52" r="10" fill="#0b1220" stroke="currentColor" strokeWidth="3" />
+        <path d="m63 59 7 7" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+};
