@@ -624,6 +624,14 @@ export default function ScoutDashboardContent() {
                 <EmptyState
                   title="No players found"
                   description="No player is registered with that wallet address."
+                  illustration={
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16" viewBox="0 0 64 64" fill="none">
+                      <circle cx="32" cy="32" r="29" fill="currentColor" opacity="0.1" />
+                      <rect x="12" y="21" width="40" height="27" rx="5" stroke="currentColor" strokeWidth="2.5" />
+                      <path d="M12 29h40M20 39h10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                      <circle cx="43" cy="39" r="5" stroke="currentColor" strokeWidth="2.5" />
+                    </svg>
+                  }
                 />
               )}
               {!searchLoading &&
@@ -744,6 +752,15 @@ export default function ScoutDashboardContent() {
             <EmptyState
               title="No players found"
               description="Try adjusting your filters."
+              illustration={
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20" viewBox="0 0 80 80" fill="none">
+                  <circle cx="40" cy="40" r="36" fill="currentColor" opacity="0.1" />
+                  <circle cx="32" cy="30" r="9" stroke="currentColor" strokeWidth="3" />
+                  <path d="M16 57c2-10 8-15 16-15s14 5 16 15" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                  <circle cx="55" cy="52" r="10" fill="#111827" stroke="currentColor" strokeWidth="3" />
+                  <path d="m62 59 7 7" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                </svg>
+              }
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
