@@ -22,6 +22,7 @@ import { getPlayer } from '@/lib/contract';
 import PlayerCard from '@/components/PlayerCard';
 import PlayerCardSkeleton from '@/components/PlayerCardSkeleton';
 import PlayerFilterForm from '@/components/scout/PlayerFilterForm';
+import PlayerQRScanner from '@/components/scout/PlayerQRScanner';
 import EmptyState from '@/components/ui/EmptyState';
 import ReferralPanel from '@/components/scout/ReferralPanel';
 import SpendingSummary from '@/components/scout/SpendingSummary';
@@ -364,7 +365,7 @@ export default function ScoutDashboardContent() {
         onComplete={tour.completeTour}
       />
       <div className="flex flex-col gap-8">
-        <h1 className="text-3xl font-bold text-white">Scout Dashboard</h1>
+        <div className="flex flex-wrap items-center justify-between gap-3"><h1 className="text-3xl font-bold text-white">Scout Dashboard</h1><PlayerQRScanner /></div>
 
         {subscription &&
           (() => {
