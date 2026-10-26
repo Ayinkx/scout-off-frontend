@@ -2,7 +2,7 @@
   "name": "ScoutOff — Decentralized Football Scouting",
   "short_name": "ScoutOff",
   "description": "Tamper-proof player profiles, verifiable milestones, and direct scout-to-player connections — powered by Stellar Soroban smart contracts.",
-  "start_url": "/",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#0a0f1e",
   "theme_color": "#0a0f1e",
@@ -44,5 +44,8 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "id": "/",
+  "scope": "/",
+  "prefer_related_applications": false
 }
