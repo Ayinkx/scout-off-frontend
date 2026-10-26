@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     const result = await redis.set(
       `scoutoff:region-waitlist:${emailHash}`,
       JSON.stringify({ email, region, createdAt: new Date().toISOString() }),
-      { nx: true },
+      { nx: true, ex: 60 * 60 * 24 * 365 },
     );
     // Do not disclose whether an address already exists in the store.
     if (result === null) {
