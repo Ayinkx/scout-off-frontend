@@ -13,7 +13,7 @@ function getBarcodeDetector(): DetectorConstructor | null {
   return (window as unknown as { BarcodeDetector?: DetectorConstructor }).BarcodeDetector ?? null;
 }
 
-function getPlayerPath(rawValue: string): string | null {
+export function getPlayerPath(rawValue: string): string | null {
   try {
     const target = new URL(rawValue);
     if (target.origin !== window.location.origin) return null;
